@@ -1,7 +1,6 @@
 import {action, observable} from 'mobx';
 import apiCorona from '../Services/ApiCorona';
-class NewStore {
-  @observable listNews = [];
+class StatsStore {
   @observable stats = {};
   @observable statsTop = [];
   @observable statsCountry = [];
@@ -35,16 +34,6 @@ class NewStore {
       console.log(e);
     }
   }
-  @action async getListNews() {
-    try {
-      const response = await apiCorona.getListNews();
-      if (response.status === 200 && response.data) {
-        this.listNews = response.data;
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
 }
-const newStore = new NewStore();
-export default newStore;
+const statsStore = new StatsStore();
+export default statsStore;
