@@ -2,44 +2,22 @@ import {action, observable} from 'mobx';
 import apiCorona from '../Services/ApiCorona';
 class NewStore {
   @observable listNews = [];
-  @observable stats = {};
-  @observable statsTop = [];
-  @observable statsCountry = [];
-  @action async getStats() {
+  @observable listNewsNext = [];
+  @action async getListNews(offset) {
     try {
-      const response = await apiCorona.getStats();
+      const response = await apiCorona.getListNews(offset);
       if (response.status === 200 && response.data) {
-        this.stats = response.data;
+        this.listNews = response.data.items;
       }
     } catch (e) {
       console.log(e);
     }
   }
-  @action async getStatsTop() {
+  @action async getListNewsNext(offset) {
     try {
-      const response = await apiCorona.getStatsTop();
+      const response = await apiCorona.getListNews(offset);
       if (response.status === 200 && response.data) {
-        this.statsTop = response.data;
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  @action async getStatsCountry() {
-    try {
-      const response = await apiCorona.getStatsCountry();
-      if (response.status === 200 && response.data) {
-        this.statsCountry = response.data;
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
-  @action async getListNews() {
-    try {
-      const response = await apiCorona.getListNews();
-      if (response.status === 200 && response.data) {
-        this.listNews = response.data;
+        this.listNewsNext = response.data.items;
       }
     } catch (e) {
       console.log(e);

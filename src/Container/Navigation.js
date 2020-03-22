@@ -13,7 +13,7 @@ class Navigation extends React.Component {
           <Scene tabs={true} key="main">
             <Scene
               key="newTab"
-              title="New Tab"
+              title="News"
               hideNavBar={true}
               component={NewScreen}
               navTransparent={true}

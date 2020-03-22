@@ -1,4 +1,5 @@
 const colors = {
+  borderColor: '#CBD5E0',
   cardBackground: '#F4F4F4',
   confirmBackground: '#F8D7D7',
   confirmText: '#E53E3E',
@@ -6,6 +7,7 @@ const colors = {
   recoverText: '#4DA169',
   deathBackground: '#E2E8F0',
   deathText: '#717F96',
+  timeColor: '#438E8C',
 };
 
 export default colors;

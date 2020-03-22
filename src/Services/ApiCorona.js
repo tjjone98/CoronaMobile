@@ -1,9 +1,5 @@
 import axios from 'axios';
 class ApiCorona {
-  async getListNews() {
-    return axios.get('');
-  }
-
   /*
    *  return the stats of all country
    * */
@@ -23,6 +19,16 @@ class ApiCorona {
    * */
   async getStatsTop() {
     return axios.get('http://api.coronatracker.com/v2/stats/top');
+  }
+
+  /*
+   *  return list new of country
+   * */
+
+  async getListNews(offset) {
+    return axios.get(
+      `http://api.coronatracker.com/news/trending?limit=9&language=vi&offset=${offset}`,
+    );
   }
 }
 export default new ApiCorona();
