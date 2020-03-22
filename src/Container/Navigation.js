@@ -1,16 +1,16 @@
 import React from 'react';
-import {View, Text} from 'react-native';
 import {Router, Scene} from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import NewScreen from '../Screens/NewScreen/NewScreen';
 import AboutScreen from '../Screens/AboutScreen/AboutScreen';
 import TravelAlertScreen from '../Screens/TravelAlertScreen/TravelAlertScreen';
+import DetailScreen from '../Screens/DetailScreen/DetailScreen';
 class Navigation extends React.Component {
   render() {
     return (
       <Router>
-        <Scene key="root" hideNavBar={true}>
-          <Scene tabs={true} key="main">
+        <Scene key="root">
+          <Scene tabs={true} key="main" hideNavBar={true}>
             <Scene
               key="newTab"
               title="News"
@@ -38,6 +38,7 @@ class Navigation extends React.Component {
               component={TravelAlertScreen}
             />
           </Scene>
+          <Scene key="detailScreen" component={DetailScreen} />
         </Scene>
       </Router>
     );

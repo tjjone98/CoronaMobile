@@ -11,7 +11,9 @@ class ApiCorona {
    *  return country stats
    * */
   async getStatsCountry() {
-    return axios.get('http://api.coronatracker.com/v2/stats/custom');
+    return axios.get(
+      'http://api.coronatracker.com/v3/stats/bno/total_daily_cases/country?countryCode=vn',
+    );
   }
 
   /*

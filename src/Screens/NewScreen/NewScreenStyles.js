@@ -7,19 +7,21 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
   },
-  live: {
-    color: colors.confirmText,
-    fontSize: fonts.fontTitle,
-    fontWeight: '700',
+  select: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingRight: 5,
+    paddingLeft: 5,
   },
   stats: {
     flex: 2,
     flexDirection: 'column',
     borderColor: colors.borderColor,
-    borderWidth: 0.5,
     margin: 4,
     borderRadius: 4,
     padding: 4,
+    borderBottomWidth: 0.6,
   },
   statsDetail: {
     flex: 3,
@@ -28,7 +30,8 @@ const styles = StyleSheet.create({
   },
   list: {
     flex: 6,
-    padding: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   card: {
     flex: 1,
@@ -39,6 +42,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     ...base.shadow,
+    height: 80,
   },
   confirmText: {
     fontSize: fonts.fontTitle,
@@ -85,7 +89,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
     margin: 4,
-    height: 80,
     justifyContent: 'center',
     borderColor: colors.borderColor,
     alignItems: 'center',
@@ -104,7 +107,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     padding: 2,
-    borderRadius: 50,
+    borderRadius: 5,
   },
   title: {
     flex: 7,
@@ -124,6 +127,18 @@ const styles = StyleSheet.create({
   textPublishAt: {
     fontSize: fonts.fontTime,
     color: colors.timeColor,
+  },
+  btnSelect: {
+    borderRadius: 3,
+    borderWidth: 0.5,
+    borderColor: colors.confirmText,
+    width: 80,
+    height: 20,
+    backgroundColor: colors.confirmText,
+  },
+  text: {
+    color: 'white',
+    textAlign: 'center',
   },
 });
 export default styles;

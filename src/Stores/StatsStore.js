@@ -28,7 +28,7 @@ class StatsStore {
     try {
       const response = await apiCorona.getStatsCountry();
       if (response.status === 200 && response.data) {
-        this.statsCountry = response.data;
+        this.stats = response.data;
       }
     } catch (e) {
       console.log(e);

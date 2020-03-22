@@ -1,11 +1,23 @@
 import React from 'react';
-import {View, Text, FlatList, ActivityIndicator, Image} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import styles from './NewScreenStyles';
 import {inject, observer} from 'mobx-react';
 import moment from 'moment';
+import {Actions} from 'react-native-router-flux';
 const Item = ({item}) => {
   return (
-    <View style={styles.item}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => {
+        Actions.detailScreen({article: item});
+      }}>
       <View style={{flex: 1, flexDirection: 'row'}}>
         <Image style={styles.item_image} source={{uri: item.urlToImage}} />
         <View style={styles.item_view}>
@@ -18,7 +30,7 @@ const Item = ({item}) => {
           </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 @inject('statsStore')
@@ -31,11 +43,11 @@ class NewScreen extends React.Component {
       offset: 1,
       data: [],
       isLoading: true,
+      key: 'world',
     };
   }
-
   async componentDidMount() {
-    await this.props.statsStore.getStats();
+    await this.fetchDataGlobal();
     await this.props.newStore.getListNews(this.state.offset);
     this.setState({
       data: this.props.newStore.listNews,
@@ -53,6 +65,18 @@ class NewScreen extends React.Component {
       isLoading: false,
     });
   };
+  fetchDataCountry = async () => {
+    this.setState({
+      key: 'VN',
+    });
+    await this.props.statsStore.getStatsCountry();
+  };
+  fetchDataGlobal = async () => {
+    this.setState({
+      key: 'world',
+    });
+    await this.props.statsStore.getStats();
+  };
   renderFooter = () => {
     if (this.state.isLoading) {
       return null;
@@ -68,7 +92,23 @@ class NewScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.stats}>
-          <Text style={styles.live}>Live</Text>
+          <View style={styles.select}>
+            <Text>Stats of the {this.state.key}</Text>
+            <TouchableOpacity
+              style={styles.btnSelect}
+              onPress={async () => {
+                await this.fetchDataGlobal();
+              }}>
+              <Text style={styles.text}>Global</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.btnSelect}
+              onPress={async () => {
+                await this.fetchDataCountry();
+              }}>
+              <Text style={styles.text}>VN</Text>
+            </TouchableOpacity>
+          </View>
           <View style={styles.statsDetail}>
             <View style={styles.card}>
               <Text style={styles.confirmText}>Confirmed</Text>
