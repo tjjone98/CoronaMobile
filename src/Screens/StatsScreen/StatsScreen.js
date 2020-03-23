@@ -1,0 +1,130 @@
+import React from 'react';
+import {View, Text, FlatList} from 'react-native';
+import styles from './StastScreenStyles';
+import colors from '../../Themes/Colors';
+import {inject, observer} from 'mobx-react';
+const Item = ({item}) => {
+  return (
+    <View style={styles.item}>
+      <View style={styles.tableHead}>
+        <Text style={styles.textData}>{item.countryName}</Text>
+      </View>
+      <View style={styles.columnData}>
+        <Text style={styles.textData}>{item.confirmed}</Text>
+      </View>
+      <View style={styles.columnData}>
+        <Text style={styles.textData}>{item.deaths}</Text>
+      </View>
+      <View style={styles.columnData}>
+        <Text style={styles.textData}>{item.recovered}</Text>
+      </View>
+    </View>
+  );
+};
+@inject('analyticsStore')
+@inject('statsStore')
+@observer
+class StatsScreen extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: true,
+    };
+  }
+  async componentDidMount() {
+    this.fetchAnalytics();
+  }
+
+  fetchAnalytics = async () => {
+    await this.props.analyticsStore.getListAnalytics();
+    await this.props.statsStore.getStats();
+    this.setState({
+      isLoading: false,
+    });
+  };
+  render() {
+    return (
+      <View style={styles.container}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            alignItems: 'center',
+            borderBottomWidth: 0.4,
+
+            paddingLeft: 3,
+          }}>
+          <View
+            style={{
+              flex: 1,
+              borderRightWidth: 0.4,
+            }}>
+            <Text
+              style={{
+                flex: 1,
+                textAlign: 'center',
+              }}>
+              Country
+            </Text>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              borderRightWidth: 0.4,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text
+              style={{flex: 1, color: colors.confirmText, fontWeight: 'bold'}}>
+              Confirmed
+            </Text>
+            <Text style={{flex: 1, color: colors.confirmText}}>
+              {this.props.statsStore.stats.confirmed}
+            </Text>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              borderRightWidth: 0.4,
+              alignItems: 'center',
+            }}>
+            <Text
+              style={{flex: 1, color: colors.deathText, fontWeight: 'bold'}}>
+              Deaths
+            </Text>
+            <Text style={{flex: 1, color: colors.deathText}}>
+              {this.props.statsStore.stats.deaths}
+            </Text>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+            }}>
+            <Text
+              style={{flex: 1, color: colors.recoverText, fontWeight: 'bold'}}>
+              Recovered
+            </Text>
+            <Text style={{flex: 1, color: colors.recoverText}}>
+              {this.props.statsStore.stats.recovered}
+            </Text>
+          </View>
+        </View>
+        <View
+          style={{
+            flex: 9,
+          }}>
+          <FlatList
+            data={this.props.analyticsStore.listAnalytics}
+            removeClippedSubviews={true}
+            keyExtractor={({item}, index) => index.toString()}
+            renderItem={({item}) => {
+              return <Item item={item} />;
+            }}
+          />
+        </View>
+      </View>
+    );
+  }
+}
+export default StatsScreen;

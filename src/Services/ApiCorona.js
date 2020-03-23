@@ -32,5 +32,11 @@ class ApiCorona {
       `http://api.coronatracker.com/news/trending?limit=9&language=vi&offset=${offset}`,
     );
   }
+  /*
+   *  return list analytics
+   * */
+  async getAnalytics() {
+    return axios.get('http://api.coronatracker.com/v2/analytics/country');
+  }
 }
 export default new ApiCorona();

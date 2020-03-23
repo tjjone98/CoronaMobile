@@ -7,21 +7,26 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
   },
-  select: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingRight: 5,
-    paddingLeft: 5,
-  },
   stats: {
     flex: 2,
     flexDirection: 'column',
     borderColor: colors.borderColor,
-    margin: 4,
-    borderRadius: 4,
+    margin: 5,
+    borderRadius: 5,
     padding: 4,
     borderBottomWidth: 0.6,
+  },
+  select: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingRight: 5,
+    paddingLeft: 5,
+    borderColor: colors.borderColor,
+    borderRadius: 4,
+    borderWidth: 0.4,
+    margin: 2,
   },
   statsDetail: {
     flex: 3,
@@ -42,7 +47,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     ...base.shadow,
-    height: 80,
   },
   confirmText: {
     fontSize: fonts.fontTitle,
@@ -139,6 +143,9 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     textAlign: 'center',
+  },
+  picker: {
+    flex: 1,
   },
 });
 export default styles;

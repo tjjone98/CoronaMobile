@@ -6,6 +6,7 @@ import {
   ActivityIndicator,
   Image,
   TouchableOpacity,
+  Picker,
 } from 'react-native';
 import styles from './NewScreenStyles';
 import {inject, observer} from 'mobx-react';
@@ -43,7 +44,7 @@ class NewScreen extends React.Component {
       offset: 1,
       data: [],
       isLoading: true,
-      key: 'world',
+      language: '',
     };
   }
   async componentDidMount() {
@@ -66,15 +67,9 @@ class NewScreen extends React.Component {
     });
   };
   fetchDataCountry = async () => {
-    this.setState({
-      key: 'VN',
-    });
     await this.props.statsStore.getStatsCountry();
   };
   fetchDataGlobal = async () => {
-    this.setState({
-      key: 'world',
-    });
     await this.props.statsStore.getStats();
   };
   renderFooter = () => {
@@ -84,7 +79,7 @@ class NewScreen extends React.Component {
     return (
       <View>
         <ActivityIndicator style={{color: '#000'}} />
-        <Text>Đang tải</Text>
+        <Text style={{textAlign: 'center'}}>Đang tải</Text>
       </View>
     );
   };
@@ -93,21 +88,24 @@ class NewScreen extends React.Component {
       <View style={styles.container}>
         <View style={styles.stats}>
           <View style={styles.select}>
-            <Text>Stats of the {this.state.key}</Text>
-            <TouchableOpacity
-              style={styles.btnSelect}
-              onPress={async () => {
-                await this.fetchDataGlobal();
-              }}>
-              <Text style={styles.text}>Global</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.btnSelect}
-              onPress={async () => {
-                await this.fetchDataCountry();
-              }}>
-              <Text style={styles.text}>VN</Text>
-            </TouchableOpacity>
+            <View style={styles.picker}>
+              <Picker
+                selectedValue={this.state.language}
+                itemStyle={styles.itemStyle}
+                onValueChange={async (itemValue, itemIndex) => {
+                  this.setState({
+                    language: itemValue,
+                  });
+                  if (itemValue === 'global') {
+                    this.fetchDataGlobal();
+                  } else {
+                    this.fetchDataCountry();
+                  }
+                }}>
+                <Picker.Item label="Global" value="global" />
+                <Picker.Item label="Viet Nam" value="vn" />
+              </Picker>
+            </View>
           </View>
           <View style={styles.statsDetail}>
             <View style={styles.card}>
