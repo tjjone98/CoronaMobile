@@ -51,20 +51,23 @@ class StatsScreen extends React.Component {
             flexDirection: 'row',
             alignItems: 'center',
             borderBottomWidth: 0.4,
-
             paddingLeft: 3,
           }}>
           <View
             style={{
               flex: 1,
-              borderRightWidth: 0.4,
+              borderRightWidth: 1,
+              justifyContent: 'center',
+              alignItems: 'center',
             }}>
             <Text
               style={{
                 flex: 1,
-                textAlign: 'center',
               }}>
               Country
+            </Text>
+            <Text style={{flex: 1, color: colors.confirmText}}>
+              {this.props.analyticsStore.listAnalytics.length}
             </Text>
           </View>
           <View

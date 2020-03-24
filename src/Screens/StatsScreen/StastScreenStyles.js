@@ -9,9 +9,7 @@ const styles = StyleSheet.create({
     margin: 5,
     borderWidth: 0.4,
     borderRadius: 4,
-    ...base.shadow,
-    borderColor: 'transparent',
-    padding: 2,
+    borderColor: colors.borderColor,
   },
   item: {
     flex: 1,
@@ -20,7 +18,7 @@ const styles = StyleSheet.create({
   tableHead: {
     flex: 1,
     borderRightWidth: 0.4,
-    borderBottomWidth: 0.4,
+    borderBottomWidth: 1,
     borderLeftWidth: 0.3,
     paddingTop: 5,
     paddingBottom: 5,
@@ -33,7 +31,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRightWidth: 0.3,
-    borderBottomWidth: 0.4,
+    borderBottomWidth: 1,
     paddingTop: 5,
     paddingBottom: 5,
     borderLeftWidth: 0.3,
