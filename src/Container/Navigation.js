@@ -1,10 +1,9 @@
 import React from 'react';
 import {Router, Scene} from 'react-native-router-flux';
-import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconIonic from 'react-native-vector-icons/Ionicons';
 import IconEntypo from 'react-native-vector-icons/Entypo';
+import IconFeather from 'react-native-vector-icons/Feather';
 import NewScreen from '../Screens/NewScreen/NewScreen';
-import AboutScreen from '../Screens/AboutScreen/AboutScreen';
 import TravelAlertScreen from '../Screens/TravelAlertScreen/TravelAlertScreen';
 import DetailScreen from '../Screens/DetailScreen/DetailScreen';
 import StatsScreen from '../Screens/StatsScreen/StatsScreen';
@@ -27,7 +26,7 @@ class Navigation extends React.Component {
             />
             <Scene
               key="statsTab"
-              title="Stats Detail"
+              title="Stats"
               hideNavBar={true}
               component={StatsScreen}
               icon={() => {
@@ -35,10 +34,13 @@ class Navigation extends React.Component {
               }}
             />
             <Scene
-              key="aboutTab"
-              title="About Tab"
+              key="travelTab"
+              title="Travel Alert"
               hideNavBar={true}
-              component={AboutScreen}
+              icon={() => {
+                return <IconFeather name="alert-circle" size={25} />;
+              }}
+              component={TravelAlertScreen}
             />
           </Scene>
           <Scene key="detailScreen" component={DetailScreen} />

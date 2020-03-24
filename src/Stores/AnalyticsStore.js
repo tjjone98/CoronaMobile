@@ -1,7 +1,9 @@
 import {action, observable} from 'mobx';
 import apiCorona from '../Services/ApiCorona';
-class Analytics {
+class AnalyticsStore {
   @observable listAnalytics = [];
+
+  // get analytics list
   @action async getListAnalytics() {
     try {
       const response = await apiCorona.getAnalytics();
@@ -13,5 +15,5 @@ class Analytics {
     }
   }
 }
-const analyticsStore = new Analytics();
+const analyticsStore = new AnalyticsStore();
 export default analyticsStore;

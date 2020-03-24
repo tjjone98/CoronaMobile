@@ -4,6 +4,8 @@ class StatsStore {
   @observable stats = {};
   @observable statsTop = [];
   @observable statsCountry = [];
+
+  // get stats of global
   @action async getStats() {
     try {
       const response = await apiCorona.getStats();
@@ -14,16 +16,8 @@ class StatsStore {
       console.log(e);
     }
   }
-  @action async getStatsTop() {
-    try {
-      const response = await apiCorona.getStatsTop();
-      if (response.status === 200 && response.data) {
-        this.statsTop = response.data;
-      }
-    } catch (e) {
-      console.log(e);
-    }
-  }
+
+  // get stats of country
   @action async getStatsCountry() {
     try {
       const response = await apiCorona.getStatsCountry();

@@ -3,6 +3,8 @@ import apiCorona from '../Services/ApiCorona';
 class NewStore {
   @observable listNews = [];
   @observable listNewsNext = [];
+
+  // get list news
   @action async getListNews(offset) {
     try {
       const response = await apiCorona.getListNews(offset);
@@ -13,6 +15,8 @@ class NewStore {
       console.log(e);
     }
   }
+
+  // get list news next
   @action async getListNewsNext(offset) {
     try {
       const response = await apiCorona.getListNews(offset);

@@ -17,16 +17,8 @@ class ApiCorona {
   }
 
   /*
-   *  return top stats
+   *  return list news of country
    * */
-  async getStatsTop() {
-    return axios.get('http://api.coronatracker.com/v2/stats/top');
-  }
-
-  /*
-   *  return list new of country
-   * */
-
   async getListNews(offset) {
     return axios.get(
       `http://api.coronatracker.com/news/trending?limit=9&language=vi&offset=${offset}`,
@@ -36,7 +28,13 @@ class ApiCorona {
    *  return list analytics
    * */
   async getAnalytics() {
-    return axios.get('http://api.coronatracker.com/v2/analytics/country');
+    return axios.get('http://api.coronatracker.com/v3/stats/latest');
+  }
+  /*
+   * travel alert
+   * */
+  async getTravelAlert() {
+    return axios.get('http://api.coronatracker.com/v1/travel-alert');
   }
 }
 export default new ApiCorona();

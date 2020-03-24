@@ -1,39 +1,8 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  ActivityIndicator,
-  Image,
-  TouchableOpacity,
-  Picker,
-} from 'react-native';
+import {View, Text, FlatList, ActivityIndicator, Picker} from 'react-native';
 import styles from './NewScreenStyles';
 import {inject, observer} from 'mobx-react';
-import moment from 'moment';
-import {Actions} from 'react-native-router-flux';
-const Item = ({item}) => {
-  return (
-    <TouchableOpacity
-      style={styles.item}
-      onPress={() => {
-        Actions.detailScreen({article: item});
-      }}>
-      <View style={{flex: 1, flexDirection: 'row'}}>
-        <Image style={styles.item_image} source={{uri: item.urlToImage}} />
-        <View style={styles.item_view}>
-          <Text style={styles.title}>{item.title}</Text>
-          <View style={styles.siteName}>
-            <Text style={styles.textSiteName}>{item.siteName}</Text>
-            <Text style={styles.textPublishAt}>
-              {moment(`${item.publishedAt}`, 'YYYYMMDD').fromNow()}
-            </Text>
-          </View>
-        </View>
-      </View>
-    </TouchableOpacity>
-  );
-};
+import Item from './Component/Item';
 @inject('statsStore')
 @inject('newStore')
 @observer
@@ -55,6 +24,10 @@ class NewScreen extends React.Component {
       isLoading: false,
     });
   }
+
+  /*
+   *  function support
+   * */
   loadMoreData = async () => {
     this.setState({
       isLoading: true,
@@ -83,6 +56,10 @@ class NewScreen extends React.Component {
       </View>
     );
   };
+
+  /*
+   *  render view
+   * */
   render() {
     return (
       <View style={styles.container}>

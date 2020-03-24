@@ -3,24 +3,7 @@ import {View, Text, FlatList} from 'react-native';
 import styles from './StastScreenStyles';
 import colors from '../../Themes/Colors';
 import {inject, observer} from 'mobx-react';
-const Item = ({item}) => {
-  return (
-    <View style={styles.item}>
-      <View style={styles.tableHead}>
-        <Text style={styles.textData}>{item.countryName}</Text>
-      </View>
-      <View style={styles.columnData}>
-        <Text style={styles.textData}>{item.confirmed}</Text>
-      </View>
-      <View style={styles.columnData}>
-        <Text style={styles.textData}>{item.deaths}</Text>
-      </View>
-      <View style={styles.columnData}>
-        <Text style={styles.textData}>{item.recovered}</Text>
-      </View>
-    </View>
-  );
-};
+import Item from './Components/Item';
 @inject('analyticsStore')
 @inject('statsStore')
 @observer
@@ -32,9 +15,12 @@ class StatsScreen extends React.Component {
     };
   }
   async componentDidMount() {
-    this.fetchAnalytics();
+    await this.fetchAnalytics();
   }
 
+  /*
+   *  function support fetch data
+   * */
   fetchAnalytics = async () => {
     await this.props.analyticsStore.getListAnalytics();
     await this.props.statsStore.getStats();
@@ -42,6 +28,10 @@ class StatsScreen extends React.Component {
       isLoading: false,
     });
   };
+
+  /*
+   *  render view
+   * */
   render() {
     return (
       <View style={styles.container}>
