@@ -1,13 +1,18 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import styles from '../StastScreenStyles';
+import {Actions} from 'react-native-router-flux';
 class Item extends React.Component {
   render() {
     return (
       <View style={styles.item}>
-        <View style={styles.tableHead}>
-          <Text style={styles.textData}>{this.props.item.country}</Text>
-        </View>
+        <TouchableOpacity
+          onPress={() => {
+            Actions.statsCountry({country: this.props.item});
+          }}
+          style={styles.tableHead}>
+          <Text style={styles.textData}>{this.props.item.countryName}</Text>
+        </TouchableOpacity>
         <View style={styles.columnData}>
           <Text style={styles.textData}>{this.props.item.confirmed}</Text>
         </View>

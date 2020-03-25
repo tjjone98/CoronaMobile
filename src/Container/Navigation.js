@@ -5,8 +5,9 @@ import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFeather from 'react-native-vector-icons/Feather';
 import NewScreen from '../Screens/NewScreen/NewScreen';
 import TravelAlertScreen from '../Screens/TravelAlertScreen/TravelAlertScreen';
-import DetailScreen from '../Screens/DetailScreen/DetailScreen';
+import DetailScreen from '../Screens/DetailScreen/DetailNews/DetailScreen';
 import StatsScreen from '../Screens/StatsScreen/StatsScreen';
+import StatsCountry from '../Screens/DetailScreen/DetailStatsCountry/StatsCountry';
 class Navigation extends React.Component {
   render() {
     return (
@@ -44,6 +45,7 @@ class Navigation extends React.Component {
             />
           </Scene>
           <Scene key="detailScreen" component={DetailScreen} />
+          <Scene key="statsCountry" component={StatsCountry} navTransparent />
         </Scene>
       </Router>
     );

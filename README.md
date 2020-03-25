@@ -7,7 +7,7 @@
 
 ## App Review
 
-![News Screent](dist/images/NewsScreen.jpg 'New Screen')
+![New Screen](dist/images/NewsScreen.jpg 'New Screen')
 ![Stats Screen](dist/images/StatsScreen.jpg 'Stats Screen')
 ![Travel Alert Screen](dist/images/TravelAlertScreen.jpg 'Travel Alert')
 

@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
-import fonts from '../../Themes/Fonts';
-import colors from '../../Themes/Colors';
-import base from '../../Themes/Base';
+import fonts from '../../../Themes/Fonts';
+import colors from '../../../Themes/Colors';
+import base from '../../../Themes/Base';
 const styles = StyleSheet.create({
   container: {
     flex: 1,

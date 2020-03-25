@@ -46,7 +46,8 @@ class StatsScreen extends React.Component {
           <View
             style={{
               flex: 1,
-              borderRightWidth: 1,
+              borderRightWidth: 0.8,
+              borderColor: 'gray',
               justifyContent: 'center',
               alignItems: 'center',
             }}>
@@ -72,7 +73,7 @@ class StatsScreen extends React.Component {
               Confirmed
             </Text>
             <Text style={{flex: 1, color: colors.confirmText}}>
-              {this.props.statsStore.stats.confirmed}
+              {this.props.statsStore.stats.totalConfirmed}
             </Text>
           </View>
           <View
@@ -86,7 +87,7 @@ class StatsScreen extends React.Component {
               Deaths
             </Text>
             <Text style={{flex: 1, color: colors.deathText}}>
-              {this.props.statsStore.stats.deaths}
+              {this.props.statsStore.stats.totalDeaths}
             </Text>
           </View>
           <View
@@ -99,7 +100,7 @@ class StatsScreen extends React.Component {
               Recovered
             </Text>
             <Text style={{flex: 1, color: colors.recoverText}}>
-              {this.props.statsStore.stats.recovered}
+              {this.props.statsStore.stats.totalRecovered}
             </Text>
           </View>
         </View>

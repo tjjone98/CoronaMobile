@@ -10,7 +10,7 @@ class NewScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      offset: 1,
+      offset: 0,
       data: [],
       isLoading: true,
       language: '',
@@ -18,11 +18,7 @@ class NewScreen extends React.Component {
   }
   async componentDidMount() {
     await this.fetchDataGlobal();
-    await this.props.newStore.getListNews(this.state.offset);
-    this.setState({
-      data: this.props.newStore.listNews,
-      isLoading: false,
-    });
+    await this.fetchListNews();
   }
 
   /*
@@ -31,7 +27,7 @@ class NewScreen extends React.Component {
   loadMoreData = async () => {
     this.setState({
       isLoading: true,
-      offset: this.state.offset + 10,
+      offset: this.state.offset + 9,
     });
     await this.props.newStore.getListNewsNext(this.state.offset);
     this.setState({
@@ -44,6 +40,13 @@ class NewScreen extends React.Component {
   };
   fetchDataGlobal = async () => {
     await this.props.statsStore.getStats();
+  };
+  fetchListNews = async () => {
+    await this.props.newStore.getListNews(0);
+    this.setState({
+      data: this.props.newStore.listNews,
+      isLoading: false,
+    });
   };
   renderFooter = () => {
     if (this.state.isLoading) {
@@ -89,21 +92,21 @@ class NewScreen extends React.Component {
               <Text style={styles.confirmText}>Confirmed</Text>
               <View style={styles.confirmView} />
               <Text style={styles.confirm}>
-                {this.props.statsStore.stats.confirmed}
+                {this.props.statsStore.stats.totalConfirmed}
               </Text>
             </View>
             <View style={styles.card}>
               <Text style={styles.deathText}>Deaths</Text>
               <View style={styles.deathView} />
               <Text style={styles.death}>
-                {this.props.statsStore.stats.deaths}
+                {this.props.statsStore.stats.totalDeaths}
               </Text>
             </View>
             <View style={styles.card}>
               <Text style={styles.recoverText}>Recovered</Text>
               <View style={styles.recoverView} />
               <Text style={styles.recover}>
-                {this.props.statsStore.stats.recovered}
+                {this.props.statsStore.stats.totalRecovered}
               </Text>
             </View>
           </View>

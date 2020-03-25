@@ -4,7 +4,9 @@ class ApiCorona {
    *  return the stats of all country
    * */
   async getStats() {
-    return axios.get('http://api.coronatracker.com/v2/stats');
+    return axios.get(
+      'https://api.coronatracker.com/v3/stats/worldometer/global',
+    );
   }
 
   /*
@@ -12,7 +14,7 @@ class ApiCorona {
    * */
   async getStatsCountry() {
     return axios.get(
-      'http://api.coronatracker.com/v3/stats/bno/total_daily_cases/country?countryCode=vn',
+      'https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=VN',
     );
   }
 
@@ -21,14 +23,14 @@ class ApiCorona {
    * */
   async getListNews(offset) {
     return axios.get(
-      `http://api.coronatracker.com/news/trending?limit=9&language=vi&offset=${offset}`,
+      `https://api.coronatracker.com/news/trending?limit=9&offset=${offset}&countryCode=VN&country=Vietnam&language=vi`,
     );
   }
   /*
    *  return list analytics
    * */
   async getAnalytics() {
-    return axios.get('http://api.coronatracker.com/v3/stats/latest');
+    return axios.get('https://api.coronatracker.com/v3/analytics/country');
   }
   /*
    * travel alert
