@@ -3,7 +3,7 @@ import apiCorona from '../Services/ApiCorona';
 class StatsStore {
   @observable stats = {};
   @observable statsTop = [];
-  @observable statsCountry = [];
+  @observable statsCountry = {};
 
   // get stats of global
   @action async getStats() {
@@ -18,11 +18,11 @@ class StatsStore {
   }
 
   // get stats of country
-  @action async getStatsCountry() {
+  @action async getStatsCountry(countryCode) {
     try {
-      const response = await apiCorona.getStatsCountry();
+      const response = await apiCorona.getStatsCountry(countryCode);
       if (response.status === 200 && response.data) {
-        this.stats = response.data[0];
+        this.statsCountry = response.data[0];
       }
     } catch (e) {
       console.log(e);

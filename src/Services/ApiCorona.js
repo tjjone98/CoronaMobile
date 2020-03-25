@@ -12,9 +12,9 @@ class ApiCorona {
   /*
    *  return country stats
    * */
-  async getStatsCountry() {
+  async getStatsCountry(countryCode) {
     return axios.get(
-      'https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=VN',
+      `https://api.coronatracker.com/v3/stats/worldometer/country?countryCode=${countryCode}`,
     );
   }
 

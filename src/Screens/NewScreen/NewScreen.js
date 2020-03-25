@@ -36,7 +36,7 @@ class NewScreen extends React.Component {
     });
   };
   fetchDataCountry = async () => {
-    await this.props.statsStore.getStatsCountry();
+    await this.props.statsStore.getStatsCountry('VN');
   };
   fetchDataGlobal = async () => {
     await this.props.statsStore.getStats();
@@ -76,11 +76,6 @@ class NewScreen extends React.Component {
                   this.setState({
                     language: itemValue,
                   });
-                  if (itemValue === 'global') {
-                    this.fetchDataGlobal();
-                  } else {
-                    this.fetchDataCountry();
-                  }
                 }}>
                 <Picker.Item label="Global" value="global" />
                 <Picker.Item label="Viet Nam" value="vn" />
