@@ -2,14 +2,26 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import styles from './StatsCountryStyles';
 import {inject, observer} from 'mobx-react';
+// import {Flag} from 'react-native-svg-flagkit';
+import {StackedBarChart} from 'react-native-svg-charts';
 @inject('statsStore')
+@inject('analyticsStore')
 @observer
 class StatsCountry extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      data: [],
+      colors: ['#65B0FC', '#84EBB6', '#F7C75F'],
+      keys: ['total_confirmed', 'total_recovered', 'total_deaths'],
+    };
   }
   async componentDidMount() {
-    await this.fetchStatsCountry();
+    await this.fetchStatsCountry().then(() => {
+      this.setState({
+        data: this.props.analyticsStore.countryAnalytics,
+      });
+    });
   }
 
   /**
@@ -17,6 +29,9 @@ class StatsCountry extends React.Component {
    */
   fetchStatsCountry = async () => {
     await this.props.statsStore.getStatsCountry(this.props.country.countryCode);
+    await this.props.analyticsStore.getCountryAnalytics(
+      this.props.country.countryCode,
+    );
   };
   /**
    * render view
@@ -25,7 +40,14 @@ class StatsCountry extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.countryOver}>
-          <Text>{this.props.statsStore.statsCountry.country}</Text>
+          <Text style={styles.textDeath}>
+            {this.props.statsStore.statsCountry.country}
+          </Text>
+          {/*<Flag*/}
+          {/*  id={`${this.props.country.countryCode}`}*/}
+          {/*  width={40}*/}
+          {/*  height={20}*/}
+          {/*/>*/}
         </View>
         <View style={styles.countryDetail}>
           <View style={{flex: 1, marginTop: 40}}>
@@ -59,7 +81,14 @@ class StatsCountry extends React.Component {
               </View>
             </View>
             <View style={styles.chart}>
-              <Text>This is chart</Text>
+              <StackedBarChart
+                style={{height: 200, padding: 4}}
+                keys={this.state.keys}
+                colors={this.state.colors}
+                data={this.state.data}
+                showGrid={false}
+                contentInset={{top: 30, bottom: 30}}
+              />
             </View>
           </View>
         </View>

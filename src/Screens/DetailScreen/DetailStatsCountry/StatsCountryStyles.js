@@ -7,9 +7,12 @@ const styles = StyleSheet.create({
   },
   countryOver: {
     flex: 1,
+    flexDirection: 'row',
     position: 'absolute',
-    top: 20,
-    right: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: 14,
+    right: 15,
   },
   countryDetail: {
     flex: 1,
