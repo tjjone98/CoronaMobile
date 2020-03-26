@@ -1,4 +1,4 @@
-import {StyleSheet, Dimensions} from 'react-native';
+import {StyleSheet, Dimensions, View} from 'react-native';
 import fonts from '../../../Themes/Fonts';
 import colors from '../../../Themes/Colors';
 const styles = StyleSheet.create({
@@ -7,9 +7,12 @@ const styles = StyleSheet.create({
   },
   countryOver: {
     flex: 1,
+    flexDirection: 'row',
     position: 'absolute',
-    top: 20,
-    right: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: 14,
+    right: 15,
   },
   countryDetail: {
     flex: 1,
@@ -47,6 +50,7 @@ const styles = StyleSheet.create({
     fontSize: fonts.fontTitle,
     color: colors.deathText,
     fontWeight: 'bold',
+    marginRight: 10,
   },
   explain: {
     fontSize: fonts.fontTitleArticle,
@@ -67,6 +71,17 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 4,
     marginTop: 10,
+    flexDirection: 'column',
+  },
+  explainChart: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textExplainChart: {
+    fontSize: fonts.fontDescription,
+    color: colors.deathText,
+    marginLeft: 2,
   },
 });
 export default styles;
