@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, Image} from 'react-native';
 import styles from './StatsCountryStyles';
 import {inject, observer} from 'mobx-react';
-// import {Flag} from 'react-native-svg-flagkit';
-import {StackedBarChart} from 'react-native-svg-charts';
+import {StackedBarChart, Grid} from 'react-native-svg-charts';
+import Flag from 'react-native-flags';
 @inject('statsStore')
 @inject('analyticsStore')
 @observer
@@ -43,11 +43,7 @@ class StatsCountry extends React.Component {
           <Text style={styles.textDeath}>
             {this.props.statsStore.statsCountry.country}
           </Text>
-          {/*<Flag*/}
-          {/*  id={`${this.props.country.countryCode}`}*/}
-          {/*  width={40}*/}
-          {/*  height={20}*/}
-          {/*/>*/}
+          <Flag code={`${this.props.country.countryCode}`} size={32} />
         </View>
         <View style={styles.countryDetail}>
           <View style={{flex: 1, marginTop: 40}}>
@@ -82,13 +78,49 @@ class StatsCountry extends React.Component {
             </View>
             <View style={styles.chart}>
               <StackedBarChart
-                style={{height: 200, padding: 4}}
+                style={{height: 300, padding: 4}}
                 keys={this.state.keys}
                 colors={this.state.colors}
                 data={this.state.data}
-                showGrid={false}
-                contentInset={{top: 30, bottom: 30}}
-              />
+                contentInset={{top: 20, bottom: 20}}>
+                <Grid />
+              </StackedBarChart>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
+                }}>
+                <View style={styles.explainChart}>
+                  <View
+                    style={{
+                      height: 10,
+                      width: 10,
+                      backgroundColor: '#65B0FC',
+                    }}
+                  />
+                  <Text style={styles.textExplainChart}>Confirm</Text>
+                </View>
+                <View style={styles.explainChart}>
+                  <View
+                    style={{
+                      height: 10,
+                      width: 10,
+                      backgroundColor: '#84EBB6',
+                    }}
+                  />
+                  <Text style={styles.textExplainChart}>Recovered</Text>
+                </View>
+                <View style={styles.explainChart}>
+                  <View
+                    style={{
+                      height: 10,
+                      width: 10,
+                      backgroundColor: '#F7C75F',
+                    }}
+                  />
+                  <Text style={styles.textExplainChart}>Deaths</Text>
+                </View>
+              </View>
             </View>
           </View>
         </View>

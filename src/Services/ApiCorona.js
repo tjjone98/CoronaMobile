@@ -8,9 +8,6 @@ class ApiCorona {
       'https://api.coronatracker.com/v3/stats/worldometer/global',
     );
   }
-  /**
-   *  stats of country in a week
-   */
 
   /*
    *  return country stats
@@ -39,7 +36,7 @@ class ApiCorona {
   }
   async getCountryAnalytics(countryCode) {
     return axios.get(
-      `https://api.coronatracker.com/v3/analytics/trend/country?countryCode=${countryCode}&startDate=2020-03-20&endDate=2020-03-25`,
+      `https://api.coronatracker.com/v3/analytics/trend/country?countryCode=${countryCode}&startDate=2020-03-18&endDate=2020-03-25`,
     );
   }
   /*
