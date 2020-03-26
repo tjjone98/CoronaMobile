@@ -7,9 +7,16 @@
 
 ## App Review
 
-![New Screen](dist/images/NewsScreen.jpg 'New Screen')
-![Stats Screen](dist/images/StatsScreen.jpg 'Stats Screen')
-![Travel Alert Screen](dist/images/TravelAlertScreen.jpg 'Travel Alert')
+New Screen
+![New Screen](dist/images/NewScreen.png 'New Screen')
+New Screen Detail
+![New Screen Detail](dist/images/NewDetail.png 'New Screen Detail')
+Stats Screen
+![Stats Screen](dist/images/StatsScreen.png 'Stats Screen')
+Stats Screen Detail
+![Stats Screen Detail](dist/images/StatsDetail.png 'Stats Screen Detail')
+Travel Alert Screen
+![Travel Alert Screen](dist/images/TravelAlertScreen.png 'Travel Alert')
 
 ## Installation and build app
 
