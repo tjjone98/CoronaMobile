@@ -40,13 +40,13 @@ class StatsScreen extends React.Component {
             flex: 1,
             flexDirection: 'row',
             alignItems: 'center',
-            borderBottomWidth: 0.4,
+            borderBottomWidth: 0.3,
             paddingLeft: 3,
           }}>
           <View
             style={{
               flex: 1,
-              borderRightWidth: 0.8,
+              borderRightWidth: 0.2,
               borderColor: 'gray',
               justifyContent: 'center',
               alignItems: 'center',
@@ -64,8 +64,8 @@ class StatsScreen extends React.Component {
           <View
             style={{
               flex: 1,
-              borderRightWidth: 0.4,
-              justifyContent: 'center',
+              borderRightWidth: 0.2,
+              borderColor: 'gray',
               alignItems: 'center',
             }}>
             <Text
@@ -79,7 +79,8 @@ class StatsScreen extends React.Component {
           <View
             style={{
               flex: 1,
-              borderRightWidth: 0.4,
+              borderRightWidth: 0.2,
+              borderColor: 'gray',
               alignItems: 'center',
             }}>
             <Text
