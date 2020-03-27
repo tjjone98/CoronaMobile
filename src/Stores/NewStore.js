@@ -1,5 +1,6 @@
 import {action, observable} from 'mobx';
 import apiCorona from '../Services/ApiCorona';
+
 class NewStore {
   @observable listNews = [];
   @observable listNewsNext = [];
