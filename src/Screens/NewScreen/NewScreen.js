@@ -1,5 +1,13 @@
 import React from 'react';
-import {View, Text, FlatList, ActivityIndicator, Picker} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  Picker,
+  BackHandler,
+  Alert,
+} from 'react-native';
 import styles from './NewScreenStyles';
 import {inject, observer} from 'mobx-react';
 import Item from './Component/Item';
@@ -36,11 +44,26 @@ class NewScreen extends React.Component {
     await this.fetchDataGlobal();
     await this.fetchListNews();
     this.testPush();
+    this.backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      this.backAction,
+    );
   }
 
   /*
    *  function support
    * */
+  backAction = () => {
+    Alert.alert('Exit', 'Are you sure you want to go back?', [
+      {
+        text: 'Cancel',
+        onPress: () => null,
+        style: 'cancel',
+      },
+      {text: 'YES', onPress: () => BackHandler.exitApp()},
+    ]);
+    return true;
+  };
   testPush = () => {
     PushNotification.localNotificationSchedule({
       message: 'Update stats corona now!',
