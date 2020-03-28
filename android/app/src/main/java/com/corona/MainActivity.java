@@ -1,7 +1,7 @@
 package com.corona;
 
 import com.facebook.react.ReactActivity;
-
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 public class MainActivity extends ReactActivity {
 
   /**
@@ -12,4 +12,5 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "Corona";
   }
+
 }

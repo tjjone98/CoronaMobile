@@ -1,8 +1,17 @@
 import React from 'react';
-import {View, Text, FlatList, ActivityIndicator, Picker} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  ActivityIndicator,
+  Picker,
+  BackHandler,
+  Alert,
+} from 'react-native';
 import styles from './NewScreenStyles';
 import {inject, observer} from 'mobx-react';
 import Item from './Component/Item';
+import PushNotification from 'react-native-push-notification';
 @inject('statsStore')
 @inject('newStore')
 @observer
@@ -15,28 +24,51 @@ class NewScreen extends React.Component {
       isLoading: true,
       language: '',
     };
+    PushNotification.configure({
+      onRegister: function(token) {
+        console.log('TOKEN:', token);
+      },
+      onNotification: function(notification) {
+        console.log('NOTIFICATION:', notification);
+      },
+      permissions: {
+        alert: true,
+        badge: true,
+        sound: true,
+      },
+      popInitialNotification: true,
+      requestPermissions: true,
+    });
   }
   async componentDidMount() {
     await this.fetchDataGlobal();
     await this.fetchListNews();
+    this.testPush();
+    this.backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      this.backAction,
+    );
   }
 
   /*
    *  function support
    * */
-  loadMoreData = async () => {
-    this.setState({
-      isLoading: true,
-      offset: this.state.offset + 9,
-    });
-    await this.props.newStore.getListNewsNext(this.state.offset);
-    this.setState({
-      data: this.state.data.concat(this.props.newStore.listNewsNext),
-      isLoading: false,
-    });
+  backAction = () => {
+    Alert.alert('Exit', 'Are you sure you want to go back?', [
+      {
+        text: 'Cancel',
+        onPress: () => null,
+        style: 'cancel',
+      },
+      {text: 'YES', onPress: () => BackHandler.exitApp()},
+    ]);
+    return true;
   };
-  fetchDataCountry = async () => {
-    await this.props.statsStore.getStatsCountry('VN');
+  testPush = () => {
+    PushNotification.localNotificationSchedule({
+      message: 'Update stats corona now!',
+      date: new Date(Date.now() + 18000 * 1000), // in 5 hours
+    });
   };
   fetchDataGlobal = async () => {
     await this.props.statsStore.getStats();
@@ -45,6 +77,17 @@ class NewScreen extends React.Component {
     await this.props.newStore.getListNews(0);
     this.setState({
       data: this.props.newStore.listNews,
+      isLoading: false,
+    });
+  };
+  loadMoreData = async () => {
+    this.setState({
+      isLoading: true,
+      offset: this.state.offset + 9,
+    });
+    await this.props.newStore.getListNewsNext(this.state.offset);
+    this.setState({
+      data: this.state.data.concat(this.props.newStore.listNewsNext),
       isLoading: false,
     });
   };
@@ -72,7 +115,7 @@ class NewScreen extends React.Component {
               <Picker
                 selectedValue={this.state.language}
                 itemStyle={styles.itemStyle}
-                onValueChange={async (itemValue, itemIndex) => {
+                onValueChange={(itemValue, itemIndex) => {
                   this.setState({
                     language: itemValue,
                   });
