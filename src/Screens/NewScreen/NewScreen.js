@@ -12,6 +12,7 @@ import styles from './NewScreenStyles';
 import {inject, observer} from 'mobx-react';
 import Item from './Component/Item';
 import PushNotification from 'react-native-push-notification';
+import {Actions} from 'react-native-router-flux';
 @inject('statsStore')
 @inject('newStore')
 @observer
@@ -43,31 +44,39 @@ class NewScreen extends React.Component {
   async componentDidMount() {
     await this.fetchDataGlobal();
     await this.fetchListNews();
-    this.testPush();
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       this.backAction,
     );
+    // this.testPush();
   }
 
   /*
    *  function support
    * */
   backAction = () => {
-    Alert.alert('Exit', 'Are you sure you want to go back?', [
-      {
-        text: 'Cancel',
-        onPress: () => null,
-        style: 'cancel',
-      },
-      {text: 'YES', onPress: () => BackHandler.exitApp()},
-    ]);
-    return true;
+    if (Actions.currentScene === '_newTab') {
+      Alert.alert('Exit', 'Are you sure?', [
+        {
+          text: 'Cancel',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {text: 'YES', onPress: () => BackHandler.exitApp(), style: 'yes'},
+      ]);
+      return true;
+    } else {
+      return false;
+    }
   };
+
+  componentWillUnmount() {
+    this.backHandler.remove();
+  }
   testPush = () => {
     PushNotification.localNotificationSchedule({
       message: 'Update stats corona now!',
-      date: new Date(Date.now() + 18000 * 1000), // in 5 hours
+      date: new Date(Date.now() + 5 * 1000), // in 5 hours
     });
   };
   fetchDataGlobal = async () => {
