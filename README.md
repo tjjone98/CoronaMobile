@@ -11,7 +11,7 @@
 ![New Screen Detail](dist/images/NewDetail.png 'New Screen Detail')
 ![Stats Screen](dist/images/StatsScreen.png 'Stats Screen')
 ![Stats Screen Detail](dist/images/StatsDetail.png 'Stats Screen Detail')
-![Travel Alert Screen](dist/images/TravelAlertScreen.png 'Travel Alert')
+![Travel Alert Screen](dist/images/TravelAlert.png 'Travel Alert')
 
 ## Installation and build app
 
