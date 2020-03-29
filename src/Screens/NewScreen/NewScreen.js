@@ -54,6 +54,7 @@ class NewScreen extends React.Component {
   /*
    *  function support
    * */
+
   backAction = () => {
     if (Actions.currentScene === '_newTab') {
       Alert.alert('Exit', 'Are you sure?', [
@@ -70,14 +71,21 @@ class NewScreen extends React.Component {
     }
   };
 
-  componentWillUnmount() {
-    this.backHandler.remove();
-  }
   testPush = () => {
-    PushNotification.localNotificationSchedule({
-      message: 'Update stats corona now!',
-      date: new Date(Date.now() + 5 * 1000), // in 5 hours
-    });
+    setTimeout(
+      PushNotification.localNotification({
+        ticker: 'My Notification Ticker', // (optional)
+        autoCancel: true, // (optional) default: true
+        largeIcon: 'ic_launcher', // (optional) default: "ic_launcher"
+        smallIcon: 'ic_notification', // (optional) default: "ic_notification" with fallback for "ic_launcher"
+        bigText: 'My big text that will be shown when notification is expanded', // (optional) default: "message" prop
+        subText: 'This is a subText', // (optional) default: none
+        color: 'red', // (optional) default: system default
+        vibrate: true, // (optional) default: true
+        vibration: 300, // vibration length in milliseconds, ignored if vibrate=false, default: 1000
+      }),
+      2000,
+    );
   };
   fetchDataGlobal = async () => {
     await this.props.statsStore.getStats();
