@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, SafeAreaView} from 'react-native';
+import {View, BackHandler, Alert} from 'react-native';
 import Navigation from './Navigation';
 class Container extends React.Component {
   render() {

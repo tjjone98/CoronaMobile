@@ -14,9 +14,9 @@ class AnalyticsStore {
       console.log(e);
     }
   }
-  @action async getCountryAnalytics(countryCode) {
+  @action async getCountryAnalytics(countryCode, date) {
     try {
-      const response = await apiCorona.getCountryAnalytics(countryCode);
+      const response = await apiCorona.getCountryAnalytics(countryCode, date);
       if (response.status === 200 && response.data) {
         this.countryAnalytics = response.data;
       }

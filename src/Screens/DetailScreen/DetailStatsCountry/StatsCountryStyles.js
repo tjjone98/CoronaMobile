@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
   },
   countryDetail: {
     flex: 1,
+    flexDirection: 'column',
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 10,
@@ -82,6 +83,22 @@ const styles = StyleSheet.create({
     fontSize: fonts.fontDescription,
     color: colors.deathText,
     marginLeft: 2,
+  },
+  countryTableStats: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+  },
+  headerTable: {
+    borderWidth: 0.3,
+    borderColor: colors.borderColor,
+    padding: 5,
+  },
+  contentTable: {
+    flex: 5,
+  },
+  textTable: {
+    fontSize: 11,
   },
 });
 export default styles;

@@ -1,5 +1,6 @@
 import React from 'react';
-import {Router, Scene} from 'react-native-router-flux';
+import {Router, Scene, Actions} from 'react-native-router-flux';
+import {BackHandler} from 'react-native';
 import IconIonic from 'react-native-vector-icons/Ionicons';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFeather from 'react-native-vector-icons/Feather';

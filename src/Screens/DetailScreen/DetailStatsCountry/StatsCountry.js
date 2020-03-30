@@ -1,9 +1,35 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 import styles from './StatsCountryStyles';
 import {inject, observer} from 'mobx-react';
 import {StackedBarChart, Grid} from 'react-native-svg-charts';
 import Flag from 'react-native-flags';
+const Row = ({item}) => {
+  return (
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}>
+      <View style={styles.headerTable}>
+        <Text style={styles.textTable}>
+          {new Date(item.last_updated).getDate()}-
+          {new Date(item.last_updated).getMonth()}
+        </Text>
+      </View>
+      <View style={styles.headerTable}>
+        <Text style={styles.textTable}>{item.total_confirmed}</Text>
+      </View>
+      <View style={styles.headerTable}>
+        <Text style={styles.textTable}>{item.total_deaths}</Text>
+      </View>
+      <View style={styles.headerTable}>
+        <Text style={styles.textTable}>{item.total_recovered}</Text>
+      </View>
+    </View>
+  );
+};
 @inject('statsStore')
 @inject('analyticsStore')
 @observer
@@ -28,9 +54,11 @@ class StatsCountry extends React.Component {
    * function support
    */
   fetchStatsCountry = async () => {
+    let date = new Date(Date.now()).getDate();
     await this.props.statsStore.getStatsCountry(this.props.country.countryCode);
     await this.props.analyticsStore.getCountryAnalytics(
       this.props.country.countryCode,
+      date,
     );
   };
   /**
@@ -46,7 +74,7 @@ class StatsCountry extends React.Component {
           <Flag code={`${this.props.country.countryCode}`} size={32} />
         </View>
         <View style={styles.countryDetail}>
-          <View style={{flex: 1, marginTop: 40}}>
+          <View style={{flex: 2, marginTop: 40}}>
             <View style={styles.overview}>
               <View style={styles.columnOverview}>
                 <Text style={styles.textConfirm}>
@@ -121,6 +149,40 @@ class StatsCountry extends React.Component {
                   <Text style={styles.textExplainChart}>Deaths</Text>
                 </View>
               </View>
+            </View>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <View style={styles.countryTableStats}>
+              <View style={styles.headerTable}>
+                <Text style={styles.textTable}>
+                  {this.props.country.countryCode}
+                </Text>
+              </View>
+              <View style={styles.headerTable}>
+                <Text style={styles.textTable}>Confirmed</Text>
+              </View>
+              <View style={styles.headerTable}>
+                <Text style={styles.textTable}>Deaths</Text>
+              </View>
+              <View style={styles.headerTable}>
+                <Text style={styles.textTable}>Recoverd</Text>
+              </View>
+            </View>
+            <View style={styles.contentTable}>
+              <FlatList
+                horizontal={true}
+                keyExtractor={({item}, index) => index.toString()}
+                data={this.props.analyticsStore.countryAnalytics}
+                renderItem={({item}) => {
+                  return <Row item={item} />;
+                }}
+              />
             </View>
           </View>
         </View>
